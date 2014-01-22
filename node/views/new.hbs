@@ -1,0 +1,48 @@
+{{!< default}}
+
+
+<div class="content">
+{{#if failure}}
+  <div class="failure">Please check your inputs</div>
+{{/if}}
+  <form action="/new" method="post">
+    <table>
+      <tr>
+        <td><label for="nick">Nickname</label></td>
+        <td><input type="text" name="nick"{{#if failure}}value='{{data.nick}}'{{/if}} /></td>
+        {{#if failure}}
+        {{#if nick}}
+        <td><span>No nickname given</span></td>
+        {{else}}
+        <td>&nbsp;</td>
+        {{/if}}
+        {{/if}}
+      </tr>
+      <tr>
+        <td><label for="hostname">Hostname</label></td>
+        <td><input type="text" name="hostname"{{#if failure}}value='{{data.hostname}}'{{/if}} /></td>
+        {{#if failure}}
+        {{#if hostname}}
+        <td><span>No hostname given</span></td>
+        {{else}}
+        <td>&nbsp;</td>
+        {{/if}}
+        {{/if}}
+      </tr>
+      <tr>
+        <td><label for="ip">IP address</label></td>
+        <td><input type="text" name="ip"{{#if failure}}value='{{data.ip}}'{{/if}} /></td>
+        {{#if failure}}
+        {{#if ip}}
+        <td><span>Invalid IP address</span></td>
+        {{else}}
+        <td>&nbsp;</td>
+        {{/if}}{{/if}}
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td><input type="submit" value="Submit" /></td>
+      </tr>
+    </table>
+  </form>
+</div>
