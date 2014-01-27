@@ -102,7 +102,8 @@ app.get('/edit/:doc_id', function(req, res) {
   if(!val.isNull(doc.doc_id)) {
     collection.find({'_id': new ObjectId(doc.doc_id)}).toArray(function(err, records) {
       if(records.length > 0) {
-        res.render('edit',records[0]);
+        records[0].title = "Edit Entry";
+        res.render('edit',{'title': 'Edit Entry', 'data': records[0]});
       } else {
         res.redirect('/list');
       }
@@ -131,6 +132,7 @@ app.post('/edit/:doc_id', function(req,res) {
         'ip': !val.isIP(doc.ip),
         'mac': !val.isMAC(doc.mac),
         'data': doc};
+      data.title = "Edit Entry";
       res.render('edit',data);
     }
   } else {
@@ -139,7 +141,7 @@ app.post('/edit/:doc_id', function(req,res) {
 });
 
 app.get('/list', function(req, res) {
-  res.render('listing');
+  res.render('listing', {'title': "Client list"});
 });
 
 app.get("/delete/:doc_id", function(req, res) {
@@ -147,6 +149,7 @@ app.get("/delete/:doc_id", function(req, res) {
   if(!val.isNull(doc.doc_id)) {
     collection.find({'_id': new ObjectId(doc.doc_id)}).toArray(function(err, records) {
       if(records.length > 0) {
+        records[0].title = "Delete Entry";
         res.render('delete', records[0]);
       } else {
         res.redirect('list');
@@ -164,6 +167,7 @@ app.get('/delete/:doc_id/confirm', function(req, res) {
       if(records.length > 0) {
         collection.remove({'_id': new ObjectId(doc.doc_id)},{w: 0});
         records[0].coe = "deleted";
+        records[0].title = "Entry Deleted";
         res.render('success', records[0]);
       } else {
         res.redirect('list');
