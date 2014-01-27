@@ -1,7 +1,7 @@
 {{!< default}}
 
 <div class="content">
-  <form action="/edit" method="post">
+  <form action="/edit/{{data._id}}" method="post">
     <table>
       <tr>
         <td>
@@ -67,5 +67,6 @@
         <td><input type="submit" value="Submit" /> <a href="/list">Cancel</a></td>
       </tr>
     </table>
+    <input type="hidden" value="{{data._id}}" name="_id">
   </form>
 </div>
